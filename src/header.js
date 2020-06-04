@@ -7,6 +7,9 @@ const HeaderStyled = styled.div`
   color: #fff;
   padding: 23px;
   border-radius: .5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   h1{
     font-size: 21px;
     text-transform: uppercase;
