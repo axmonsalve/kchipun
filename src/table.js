@@ -35,7 +35,7 @@ const TableStyled = styled.div`
     transform: rotate(60deg);
     transform-origin: left top;
     }
-    
+
     &:after {
     content: '';
     height: 14px;
