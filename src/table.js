@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import Token from './token'
 
@@ -17,6 +17,7 @@ const TableStyled = styled.div`
   }
 
   .line {
+    display: ${({ playing }) => !playing ? 'block' : 'none'};
     height: 14px;
     background: rgba(0, 0, 0, .25);
     position: absolute;
@@ -48,15 +49,47 @@ const TableStyled = styled.div`
     transform-origin: right top;
     }
   }
+
+  .in-game {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
 `;
 
 const Table = () => {
+
+  const [score, setScore] = useState(0);
+  const [playing, setPlaying] = useState(true);
+  const [pick, setPick] = useState('rock');
+  const onClick = name => {
+    console.log(name);
+    setPlaying(true);
+    setPick(name);
+  };
   return (
-    <TableStyled>
+    <TableStyled playing={playing}>
       <span className="line"></span>
-      <Token name="paper" />
-      <Token name="scissors" />
-      <Token name="rock" />
+      {
+        !playing ?
+          (<>
+            <Token name="paper" onClick={onClick} />
+            <Token name="scissors" onClick={onClick} />
+            <Token name="rock" onClick={onClick} />
+          </>) : (
+            <>
+              <div className="in-game">
+                <Token name={pick} />
+                <p>You Picked</p>
+              </div>
+              <div className="in-game">
+                <Token />
+                <p>The house picked</p>
+              </div>
+            </>
+          )
+      }
     </TableStyled>
   );
 }
