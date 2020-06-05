@@ -3,15 +3,8 @@ import styled from "styled-components"
 import Button from "./button";
 
 const RulesStyled = styled.div`
+  
   text-align: center;
-
-  h2 {
-    color: #3b4262;
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: -2px;
-    margin-bottom: 1em;
-  }
 
   .rules-overlay {
     background: white;
@@ -31,6 +24,22 @@ const RulesStyled = styled.div`
   .close-button {
     margin-top: 2em;
   }
+
+  h2 {
+    color: #3b4262;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: -2px;
+    margin-bottom: 1em;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .button {
+      position: fixed;
+      right: 2em;
+      bottom: 1.5em;
+    }
+    }  
 `;
 
 
@@ -51,7 +60,7 @@ const Rules = () => {
           <img onClick={handleToggle} src="./images/icon-close.svg" alt="Close game rules" className="close-button" />
         </div>
       )}
-      <Button onClick={handleToggle}>
+      <Button onClick={handleToggle} className="button">
         Rules
       </Button>
     </RulesStyled>
