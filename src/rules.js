@@ -44,12 +44,16 @@ const Rules = () => {
 
   return (
     <RulesStyled>
-      {visible ? <div className="rules-overlay">
-        <h2>Reglas</h2>
-        <img src="./images/image-rules.svg" alt="Reglas del juego" />
-        <img onClick={handleToggle} src="./images/icon-close.svg" alt="Close game rules" className="close-button" />
-      </div> : null}
-      <Button onClick={handleToggle} />
+      {(visible) && (
+        <div className="rules-overlay">
+          <h2>Reglas</h2>
+          <img src="./images/image-rules.svg" alt="Game Rules" />
+          <img onClick={handleToggle} src="./images/icon-close.svg" alt="Close game rules" className="close-button" />
+        </div>
+      )}
+      <Button onClick={handleToggle}>
+        Rules
+      </Button>
     </RulesStyled>
   );
 }

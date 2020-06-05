@@ -14,10 +14,16 @@ const ButtonStyled = styled.div`
   letter-spacing: 3px;
 `;
 
-const Button = ({ ...props }) => {
+export const WhiteButton = styled(ButtonStyled)`
+  background: white;
+  color: #101a3f;
+  min-width: 220px;
+`;
+
+const Button = ({ children, ...props }) => {
   return (
     <ButtonStyled {...props}>
-      Reglas
+      {children}
     </ButtonStyled>
   );
 }
