@@ -1,7 +1,8 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import Token from './token'
 import { WhiteButton } from './button'
+import { ScoreContext } from './App'
 
 const TableStyled = styled.div`
 
@@ -70,7 +71,7 @@ const elements = [
 ];
 const Table = () => {
 
-  // const [score, setScore] = useState(0);
+  const { score, setScore } = useContext(ScoreContext);
   const [results, setResults] = useState('');
   const [housePick, setHousePick] = useState('default');
   const [playing, setPlaying] = useState(false);
@@ -102,6 +103,9 @@ const Table = () => {
     const house = await launchHousePick();
     const results = playWithBot(name, house);
     setResults(results);
+    if (results === 'win') {
+      setScore(score + 1);
+    }
   };
 
   function playWithBot(pick, housePick) {

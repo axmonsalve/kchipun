@@ -52,7 +52,9 @@ const colors = {
 
 const Token = ({ name = 'default', onClick }) => {
   const handleClick = () => {
-    onClick(name);
+    if (onClick) {
+      onClick(name);
+    }
   };
   const color = colors[name];
   return (
