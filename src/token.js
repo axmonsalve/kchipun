@@ -1,18 +1,21 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
 
-const TokenWinnerAnimation = keyframes`
+const shadow = keyframes`
   to {
     box-shadow: 0 0 0 40px rgba(255,255,255,.04), 0 0 0 80px rgba(255,255,255,.04), 0 0 0 120px rgba(255,255,255,.02);
-    transform: rotateZ(360deg)  scale(1.1);
+    transform: scale(1.1);
   }
 `
-
+const box = keyframes`
+  to {
+    transform: rotateY(360deg) rotateX(360deg);
+  }
+`
 const TokenStyled = styled.div`
-
   width: 130px;
   height: 125px;
-  /* padding: ${({ name }) => (name === 'default') ? '16px' : '0'}; */
+  padding: ${({ name }) => (name === 'default') ? '16px' : '0'};
   border: 16px solid ${({ color }) => color.base};
   box-sizing: border-box;
   border-radius: 50%;
@@ -22,29 +25,28 @@ const TokenStyled = styled.div`
   position: relative;
   z-index: 2;
   ${({ isShadowAnimated }) => isShadowAnimated && 'box-shadow: 0 0 0 0px rgba(255,255,255,.04), 0 0 0 0px rgba(255,255,255,.04), 0 0 0 0px rgba(255,255,255,.02);'}
-  animation: 1s ${({ isShadowAnimated }) => isShadowAnimated ? TokenWinnerAnimation : ''} forwards;
-
+  animation: 1s ${({ isShadowAnimated }) => isShadowAnimated ? shadow : ''} forwards;
   &:active {
     transform: scale(.9);
   }
-
   .box {
     background: ${({ name }) => (name === 'default') ? '#122343' : 'white'};
     box-shadow: 0 -4px 0 ${({ name }) => (name === 'default') ? 'transparent' : '#BABFD4'};
     flex: 1;
     align-self: stretch;
-    border-radius:50%;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  @media screen and (min-width: 1024px) {
-    width: 180px;
-    height: 175px;
+    img {
+      width: 40%;
+      animation: 1s ${({ isShadowAnimated }) => isShadowAnimated ? box : ''};
     }
   }
-`;
+  @media screen and (min-width: 1024px) {
+    ${({ playing }) => playing ? 'width: 280px; height: 275px; border-width: 32px;' : 'width: 200px; height: 195px;'}
+  }
+`
 
 const colors = {
   paper: {
@@ -65,7 +67,7 @@ const colors = {
   }
 };
 
-const Token = ({ name = 'default', onClick, isShadowAnimated = false }) => {
+const Token = ({ name = 'default', onClick, isShadowAnimated = false, playing }) => {
   const handleClick = () => {
     if (onClick) {
       onClick(name);
@@ -73,7 +75,7 @@ const Token = ({ name = 'default', onClick, isShadowAnimated = false }) => {
   };
   const color = colors[name];
   return (
-    <TokenStyled color={color} onClick={handleClick} name={name} isShadowAnimated={isShadowAnimated}>
+    <TokenStyled color={color} onClick={handleClick} name={name} isShadowAnimated={isShadowAnimated} playing={playing}>
       <div className="box">
         <img src={`./images/icon-${name}.svg`} alt="" />
       </div>
